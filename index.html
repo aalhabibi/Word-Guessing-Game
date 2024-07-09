@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="headers-container">
+        <h1>Word Guessing Game</h1>
+        <h2 id="game-status">Guess The Word!!</h2>
+      </div>
+      <p id="hint">Hint:</p>
+      <div class="letter-container">
+        <span class="letter" id="letter1"></span>
+        <span class="letter" id="letter2"></span>
+        <span class="letter" id="letter3"></span>
+        <span class="letter" id="letter4"></span>
+      </div>
+      <div class="guess-container">
+        <input type="text" name="guess-textbox" id="guess-textbox" />
+        <div class="buttons">
+          <button id="guess-button">Guess</button>
+          <button id="reset-button">Reset</button>
+        </div>
+      </div>
+      <div id="stats"><p id="remaining-chances"></p></div>
+    </div>
+  </body>
+</html>
+<script src="index.js"></script>

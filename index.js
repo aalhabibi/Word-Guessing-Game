@@ -1,0 +1,223 @@
+const words = [
+  "JOKE",
+  "RICH",
+  "FAIR",
+  "DEAR",
+  "ZOOM",
+  "KEYS",
+  "FROG",
+  "VAST",
+  "TIDE",
+  "JUMP",
+  "PONY",
+  "ECHO",
+  "GIFT",
+  "YAWN",
+  "LION",
+  "ZERO",
+  "FUEL",
+  "MINT",
+  "SOFT",
+  "HELP",
+  "FIRM",
+  "QUAD",
+  "WARM",
+  "GLOW",
+  "BOLD",
+  "TREE",
+  "BARK",
+  "KICK",
+  "MOON",
+  "NEST",
+  "PARK",
+  "VIBE",
+  "DARK",
+  "JOIN",
+  "LAZY",
+  "FUNK",
+  "WIND",
+  "RAFT",
+  "GAME",
+  "ROSE",
+  "VEIL",
+  "KISS",
+  "LOVE",
+  "NICE",
+  "QUAD",
+  "YEAR",
+  "ZONE",
+  "WILD",
+  "HOME",
+  "LAMP",
+];
+const hints = [
+  "Something funny",
+  "Wealthy",
+  "Just",
+  "Precious",
+  "Zoom in",
+  "Opens doors",
+  "Amphibian",
+  "Extensive",
+  "Ocean movement",
+  "Leap",
+  "Small horse",
+  "Sound reflection",
+  "Present",
+  "Tired stretch",
+  "Big cat",
+  "Nothing",
+  "Energy source",
+  "Fresh herb",
+  "Gentle",
+  "Assistance",
+  "Stable",
+  "Four-wheel drive",
+  "Warm temperature",
+  "Soft light",
+  "Brave",
+  "Woody plant",
+  "Dog sound",
+  "Strike with foot",
+  "Celestial body",
+  "Bird's home",
+  "Public garden",
+  "Atmosphere",
+  "Dim light",
+  "Come together",
+  "Indolent",
+  "Music genre",
+  "Moving air",
+  "Small boat",
+  "Plaything",
+  "Flower",
+  "Thin covering",
+  "Affectionate touch",
+  "Romantic feeling",
+  "Pleasant",
+  "Four-wheel drive",
+  "Annual period",
+  "Area",
+  "Untamed",
+  "Residence",
+  "Illumination",
+];
+
+const guessButton = document.getElementById("guess-button");
+const resetButton = document.getElementById("reset-button");
+
+let gameOver = false;
+let guessedLetters = 0;
+let chances = 5;
+
+let wordIndex = Math.floor(Math.random() * 50);
+
+let word = words[wordIndex];
+let hint = hints[wordIndex];
+
+document.getElementById("hint").innerHTML = "Hint: " + hint;
+document.getElementById("remaining-chances").innerHTML =
+  "Remaining Chances: " + chances;
+
+function reset() {
+  for (let index = 0; index < 4; index++) {
+    document.getElementById("letter" + (index + 1)).innerHTML = "";
+    document.getElementById("letter" + (index + 1)).style.color = "green";
+  }
+
+  document.getElementById("guess-textbox").value = "";
+
+  document.getElementById("game-status").innerHTML = "Guess The Word!!";
+  document.getElementById("hint").innerHTML = "Hint: " + hint;
+  document.getElementById("remaining-chances").innerHTML =
+    "Remaining Chances: " + chances;
+
+  gameOver = false;
+}
+
+function win() {
+  chances++;
+  gameOver = true;
+  document.getElementById("game-status").innerHTML =
+    "Congrats! You have guessed the word correctly.";
+}
+
+function lose() {
+  gameOver = true;
+  document.getElementById("game-status").innerHTML =
+    "You ran out of chances :(";
+  for (let i = 0; i < word.length; i++) {
+    if (!document.getElementById("letter" + (i + 1)).innerHTML) {
+      document.getElementById("letter" + (i + 1)).innerHTML = word[i];
+      document.getElementById("letter" + (i + 1)).style.color = "red";
+    }
+  }
+}
+
+function checkGuess(word) {
+  let guess = document.getElementById("guess-textbox").value;
+  console.log(guess);
+  chances--;
+
+  //Comparing every letter of the user's guess with letters of the word
+
+  for (let i = 0; i < guess.length; i++) {
+    for (let j = 0; j < word.length; j++) {
+      if (guess[i].toUpperCase() === word[j].toUpperCase()) {
+        //Check if letter already guessed
+
+        if (
+          !(document.getElementById("letter" + (j + 1)).innerHTML == word[j])
+        ) {
+          document.getElementById("letter" + (j + 1)).innerHTML = word[j];
+          guessedLetters++;
+        }
+      }
+    }
+  }
+
+  console.log("Guessed letters " + guessedLetters);
+  console.log("chances " + chances);
+  document.getElementById("guess-textbox").value = "";
+
+  if (guessedLetters === 4) {
+    win();
+  } else if (chances === 0) {
+    lose();
+  }
+  document.getElementById("remaining-chances").innerHTML =
+    "Remaining Chances: " + chances;
+}
+
+function loadGame() {
+  console.log(word);
+
+  //Reset Button Listener
+
+  resetButton.addEventListener("click", function () {
+    //Reset counters
+
+    chances = 5;
+    guessedLetters = 0;
+
+    //Reset word
+    wordIndex = Math.floor(Math.random() * 50);
+
+    word = words[wordIndex];
+    hint = hints[wordIndex];
+
+    reset();
+
+    console.log(word);
+  });
+
+  //Guess Button Listener
+
+  guessButton.addEventListener("click", function () {
+    if (!gameOver) {
+      checkGuess(word);
+    }
+  });
+}
+
+loadGame();
