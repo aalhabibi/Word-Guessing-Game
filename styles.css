@@ -1,25 +1,30 @@
 .game-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: space-around; */
     align-items: center;
     height: 500px;
+    margin-top: 20vh;
+}
+
+#game-status {
+    text-align: center;
 }
 
 .letter {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(26, 128, 0);
-    width: 25px;
-    height: 25px;
+    color: #00ff1a;
+    width: 50px;
+    height: 50px;
     text-align: center;
     font-size: xx-large;
     padding: 10px;
     border: 2px;
-    border-color: black;
+    border-color: white;
     border-style: solid;
-
+    font-weight: 500;
 }
 
 .letter-container {
@@ -56,20 +61,29 @@
 .buttons-container {
     display: flex;
     justify-content: space-around;
-    width: 50%;
+    width: 70%;
 }
 
+.button {
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transform: scale(1.1);
+    background-color: #1fa42d;
+    font-family: Arial, Helvetica, sans-serif;
 
+}
 
 .headers-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-
+    gap: 7px
 }
 
-body,
+#hint {
+    margin-top: 10px;
+}
+
+/* body,
 html {
     height: 80%;
     width: 100%;
@@ -77,4 +91,48 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+
+} */
+
+@keyframes shake {
+    0% {
+        transform: translateX(0)
+    }
+
+    25% {
+        transform: translateX(5px)
+    }
+
+    50% {
+        transform: translateX(-5px)
+    }
+
+    75% {
+        transform: translateX(5px)
+    }
+
+    100% {
+        transform: translateX(0)
+    }
+
+
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+#remaining-chances {
+    text-align: center;
+}
+
+#stats-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#wrong-letters {
+    text-align: center;
 }
