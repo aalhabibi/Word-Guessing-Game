@@ -120,7 +120,7 @@ let wrongLetters = [];
 document.getElementById("hint").innerHTML =
   '<span style="font-weight: bold;">Hint: </span>' + hint;
 document.getElementById("remaining-chances").innerHTML =
- '<span style="font-weight: bold;">Remaining Chances</span><br>' + chances;
+  '<span style="font-weight: bold;">Remaining Chances</span><br>' + chances;
 
 function reset() {
   for (let index = 0; index < 4; index++) {
@@ -135,7 +135,7 @@ function reset() {
   document.getElementById("hint").innerHTML =
     '<span style="font-weight: bold;">Hint: </span>' + hint;
   document.getElementById("remaining-chances").innerHTML =
-'<span style="font-weight: bold;">Remaining Chances</span><br>' + chances;
+    '<span style="font-weight: bold;">Remaining Chances</span><br>' + chances;
 
   document.getElementById("wrong-letters").innerHTML = "";
   wrongLetters = [];
