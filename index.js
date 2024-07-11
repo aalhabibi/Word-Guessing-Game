@@ -172,11 +172,11 @@ function lose() {
 function checkGuess(word) {
   let guess = document.getElementById("guess-textbox").value;
 
-  //Checking if input is correct
+  //Checking if input is correct and consists of english letters
+
+  const gameStatus = document.getElementById("game-status");
 
   if (guess.length != 1 && guess.length != 4) {
-    const gameStatus = document.getElementById("game-status");
-
     gameStatus.innerHTML =
       "Please enter a single letter or a full 4-letter word.";
 
@@ -191,6 +191,23 @@ function checkGuess(word) {
     );
 
     return;
+  }
+  for (let index = 0; index < guess.length; index++) {
+    if (!/^[a-zA-Z]$/.test(guess[index])) {
+      gameStatus.innerHTML =
+        "Make sure your guess consists of English letters.";
+
+      gameStatus.classList.add("shake");
+
+      gameStatus.addEventListener(
+        "animationend",
+        () => {
+          gameStatus.classList.remove("shake");
+        },
+        { once: true }
+      );
+      return;
+    }
   }
 
   chances--;
