@@ -154,12 +154,16 @@ function win() {
 
 function lose() {
   gameOver = true;
+
   document.getElementById("game-status").innerHTML =
     "You ran out of chances :(";
+
   document.getElementById("game-status").style.color = "red";
+
   for (let i = 0; i < word.length; i++) {
     if (!document.getElementById("letter" + (i + 1)).innerHTML) {
       document.getElementById("letter" + (i + 1)).innerHTML = word[i];
+
       document.getElementById("letter" + (i + 1)).style.color = "red";
     }
   }
@@ -185,11 +189,12 @@ function checkGuess(word) {
       },
       { once: true }
     );
+
     return;
   }
-  // console.log(guess);
 
   chances--;
+
   //Comparing every letter of the user's guess with letters of the word
 
   for (let i = 0; i < guess.length; i++) {
@@ -198,15 +203,19 @@ function checkGuess(word) {
     for (let j = 0; j < word.length; j++) {
       if (guess[i].toUpperCase() === word[j].toUpperCase()) {
         //Check if letter already guessed
+
         found = true;
+
         if (
           !(document.getElementById("letter" + (j + 1)).innerHTML == word[j])
         ) {
           document.getElementById("letter" + (j + 1)).innerHTML = word[j];
+
           guessedLetters++;
         }
       }
     }
+
     if (!found && !wrongLetters.includes(guess[i].toUpperCase())) {
       wrongLetters.push(guess[i].toUpperCase());
     }
@@ -216,8 +225,6 @@ function checkGuess(word) {
     if (found && guess.length === 1) chances++;
   }
 
-  // console.log("Guessed letters " + guessedLetters);
-  // console.log("chances " + chances);
   document.getElementById("guess-textbox").value = "";
 
   if (guessedLetters === 4) {
@@ -225,17 +232,21 @@ function checkGuess(word) {
   } else if (chances === 0) {
     lose();
   }
+
   document.getElementById("remaining-chances").innerHTML =
     '<span style="font-weight: bold;">Remaining Chances</span><br>' + chances;
 
   if (wrongLetters.length != 0) {
     let wrongLettersString = "";
+
     for (let index = 0; index < wrongLetters.length; index++) {
       wrongLettersString += wrongLetters[index] + " ";
     }
+
     document.getElementById("wrong-letters").innerHTML =
       '<span style="font-weight: bold;">Wrong Guessed Letters</span><br>' +
       wrongLettersString;
+
     wrongLettersString = "";
   }
 }
